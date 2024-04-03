@@ -1,16 +1,11 @@
 package com.github.coerschkes.vorgabe_tabelle_1_3;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.util.List;
 
 public class UserSystemControl {
     private final UserSystemModel userSystemModel;
@@ -42,10 +37,8 @@ public class UserSystemControl {
 
     @FXML
     private void removeLine() {
-        // Selektieren einer markierten Zeile mittels getSelectionModel
-        // aus TableView und getSelectedIndex aus TableViewSelectionModel.
-        // Loeschen einer Zeile mittels remove aus ObservableList<E>.
-
+        final int selectedItemIndex = tablePerson.getSelectionModel().getSelectedIndex();
+        this.userSystemModel.removeFromList(selectedItemIndex);
     }
 
     @FXML
@@ -53,11 +46,11 @@ public class UserSystemControl {
         tablePerson.setEditable(true);
         columnPerson.setCellValueFactory(new PropertyValueFactory<>("surname"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        this.userSystemModel.getPersonList().addListener((ListChangeListener<Person>) change -> refreshTable());
+        this.userSystemModel.registerListener(change -> refreshTable());
     }
 
     private void refreshTable() {
-        this.tablePerson.setItems(this.userSystemModel.getPersonList());
+        this.tablePerson.setItems(this.userSystemModel.personList());
     }
 
     private boolean textFieldsAreValid() {

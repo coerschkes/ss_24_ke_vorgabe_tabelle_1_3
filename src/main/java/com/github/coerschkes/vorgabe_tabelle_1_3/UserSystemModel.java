@@ -1,20 +1,20 @@
 package com.github.coerschkes.vorgabe_tabelle_1_3;
 
-import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-public final class UserSystemModel {
-    private final ObservableList<Person> personList;
+import java.util.function.Consumer;
 
-    public UserSystemModel(ObservableList<Person> personList) {
-        this.personList = personList;
-    }
-
-    public ObservableList<Person> getPersonList() {
-        return personList;
-    }
-
+public record UserSystemModel(ObservableList<Person> personList) {
     public void addToList(final Person person) {
         this.personList.add(person);
+    }
+
+    public void removeFromList(int index) {
+        this.personList.remove(index);
+    }
+
+    public void registerListener(final Consumer<ListChangeListener.Change<? extends Person>> callback) {
+        this.personList.addListener((ListChangeListener<Person>) callback::accept);
     }
 }
