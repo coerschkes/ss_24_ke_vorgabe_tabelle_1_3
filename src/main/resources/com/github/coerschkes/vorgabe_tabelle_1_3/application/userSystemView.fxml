@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.github.coerschkes.vorgabe_tabelle_1_3.UserSystemControl">
+            fx:controller="com.github.coerschkes.vorgabe_tabelle_1_3.application.UserSystemControl">
     <center>
         <Pane prefHeight="240.0" prefWidth="480.0" BorderPane.alignment="CENTER">
             <Label layoutX="40.0" layoutY="40.0" text="Eingabe">
