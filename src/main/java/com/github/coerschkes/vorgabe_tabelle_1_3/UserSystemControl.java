@@ -30,8 +30,7 @@ public class UserSystemControl {
         if (textFieldsAreValid()) {
             final Person person = new Person(textSurname.getText(), textName.getText());
             this.userSystemModel.addToList(person);
-            this.textName.setText("");
-            this.textSurname.setText("");
+            resetTextFields();
         }
     }
 
@@ -47,6 +46,11 @@ public class UserSystemControl {
         columnPerson.setCellValueFactory(new PropertyValueFactory<>("surname"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.userSystemModel.registerListener(change -> refreshTable());
+    }
+
+    private void resetTextFields() {
+        this.textName.setText("");
+        this.textSurname.setText("");
     }
 
     private void refreshTable() {
